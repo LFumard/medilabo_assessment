@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.lfumard.medilabo_assessment.MedilaboAssessmentApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.068 s -- in com.lfumard.medilabo_assessment.MedilaboAssessmentApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.207 s -- in com.lfumard.medilabo_assessment.MedilaboAssessmentApplicationTests

@@ -1,7 +1,8 @@
 package com.lfumard.medilabo_assessment.controller;
 
 import com.lfumard.medilabo_assessment.service.AssessmentService;
-import org.junit.Test;
+//import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.junit.jupiter.MockitoExtension;

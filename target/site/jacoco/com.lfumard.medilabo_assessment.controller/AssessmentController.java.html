@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.*;
     @GetMapping(&quot;/assessment/{id}&quot;)
     public String getAssessmentByPatientId(@PathVariable Long id, @CookieValue(value=&quot;medilabo&quot;, defaultValue = &quot;NotFound&quot;) String medilaboCookie, @RequestHeader(value=&quot;Authorization&quot;) String accessToken, HttpServletRequest request ) {
 
-<span class="nc" id="L21">        logger.info(&quot;New request GetMapping : getAssessmentByPatientId : &quot; + id);</span>
-<span class="nc" id="L22">        return assessmentService.getAssessmentByPatientId(id, accessToken);</span>
+<span class="fc" id="L21">        logger.info(&quot;New request GetMapping : getAssessmentByPatientId : &quot; + id);</span>
+<span class="fc" id="L22">        return assessmentService.getAssessmentByPatientId(id, accessToken);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

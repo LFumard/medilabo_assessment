@@ -4,7 +4,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.2</version>
-<!--        <version>3.2.0</version>-->
         <relativePath/>
         <!--  lookup parent from repository  -->
     </parent>
@@ -125,7 +124,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.50</minimum>
+                                            <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -133,11 +132,11 @@
                         </configuration>
                     </execution>
                 </executions>
-<!--                <configuration>
+                <configuration>
                     <excludes>
                         <exclude>com/lfumard/medilabo_assessment/model/*</exclude>
                     </excludes>
-                </configuration>-->
+                </configuration>
             </plugin>
             <!-- Surefire report in HTML (mvn test) -->
             <plugin>
