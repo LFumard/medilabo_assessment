@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+MediLabo_assessment,com.lfumard.medilabo_assessment,MedilaboAssessmentApplication,5,3,0,0,2,1,1,1,1,1
+MediLabo_assessment,com.lfumard.medilabo_assessment.model,TriggerWord,63,59,0,0,4,4,2,2,2,2
+MediLabo_assessment,com.lfumard.medilabo_assessment.model,NoteBean,28,18,0,0,13,7,8,2,8,2
+MediLabo_assessment,com.lfumard.medilabo_assessment.model,PatientBean,46,30,0,0,21,11,13,3,13,3
+MediLabo_assessment,com.lfumard.medilabo_assessment.service,AssessmentService,0,183,2,46,0,30,2,27,0,5
+MediLabo_assessment,com.lfumard.medilabo_assessment.controller,AssessmentController,11,7,0,0,2,2,1,1,1,1

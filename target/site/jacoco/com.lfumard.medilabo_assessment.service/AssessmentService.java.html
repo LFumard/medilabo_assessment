@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssessmentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MediLabo_assessment</a> &gt; <a href="index.source.html" class="el_package">com.lfumard.medilabo_assessment.service</a> &gt; <span class="el_source">AssessmentService.java</span></div><h1>AssessmentService.java</h1><pre class="source lang-java linenums">package com.lfumard.medilabo_assessment.service;
+
+import com.lfumard.medilabo_assessment.model.NoteBean;
+import com.lfumard.medilabo_assessment.model.PatientBean;
+import com.lfumard.medilabo_assessment.model.TriggerWord;
+import com.lfumard.medilabo_assessment.proxies.NoteProxy;
+import com.lfumard.medilabo_assessment.proxies.PatientProxy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.HashSet;
+import java.util.List;
+
+@Service
+public class AssessmentService {
+
+    private TriggerWord triggerWord;
+
+    @Autowired
+    private final NoteProxy noteProxy;
+
+    @Autowired
+    private final PatientProxy patientProxy;
+
+<span class="fc" id="L27">    public AssessmentService(NoteProxy noteProxy, PatientProxy patientProxy) {</span>
+<span class="fc" id="L28">        this.noteProxy = noteProxy;</span>
+<span class="fc" id="L29">        this.patientProxy = patientProxy;</span>
+<span class="fc" id="L30">        this.triggerWord = new TriggerWord();</span>
+<span class="fc" id="L31">    }</span>
+
+    public String getAssessmentByPatientId(Long id, String accessToken ) {
+
+<span class="fc" id="L35">        PatientBean patientBean = patientProxy.getPatientById(id, accessToken);</span>
+<span class="fc" id="L36">        List&lt;NoteBean&gt; noteBeanList = noteProxy.getListNoteByPatientId(id, accessToken);</span>
+
+<span class="fc" id="L38">        int nbTrigger = countNumberOfTrigger(noteBeanList);</span>
+<span class="fc" id="L39">        int agePatient = getAge(patientBean.getBirthdate());</span>
+
+<span class="fc" id="L41">        String levelRisk = &quot;To define&quot;;</span>
+<span class="fc" id="L42">        levelRisk = defineLevelRisk(nbTrigger, agePatient, patientBean.getSex());</span>
+
+<span class="fc" id="L44">        return levelRisk;</span>
+    }
+
+    private String defineLevelRisk(int nbTrigger, int agePatient, String sex) {
+
+<span class="fc" id="L49">        String strLevelRisk = &quot;None&quot;;</span>
+
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if(nbTrigger == 0) strLevelRisk = &quot;None&quot;;</span>
+<span class="fc bfc" id="L52" title="All 6 branches covered.">        if(nbTrigger &gt;= 2 &amp;&amp; nbTrigger &lt;= 5 &amp;&amp; agePatient &gt;= 30) strLevelRisk =  &quot;Borderline&quot;;</span>
+<span class="fc bfc" id="L53" title="All 6 branches covered.">        if((sex.equals(&quot;M&quot;) &amp;&amp; agePatient &lt; 30 &amp;&amp; nbTrigger == 3) ||</span>
+<span class="pc bpc" id="L54" title="1 of 12 branches missed.">           (sex.equals(&quot;F&quot;) &amp;&amp; agePatient &lt; 30 &amp;&amp; nbTrigger == 4) ||</span>
+           (agePatient &gt;= 30 &amp;&amp; nbTrigger &gt;= 6 &amp;&amp; nbTrigger &lt;=7))
+<span class="fc" id="L56">            strLevelRisk =  &quot;In Danger&quot;;</span>
+<span class="fc bfc" id="L57" title="All 6 branches covered.">        if((sex.equals(&quot;M&quot;) &amp;&amp; agePatient &lt; 30 &amp;&amp; nbTrigger &gt;= 5) ||</span>
+<span class="pc bpc" id="L58" title="1 of 10 branches missed.">           (sex.equals(&quot;F&quot;) &amp;&amp; agePatient &lt; 30 &amp;&amp; nbTrigger &gt;= 7) ||</span>
+           (agePatient &gt;= 30 &amp;&amp; nbTrigger &gt;= 8))
+<span class="fc" id="L60">            strLevelRisk =  &quot;Early Onset&quot;;</span>
+
+<span class="fc" id="L62">        return strLevelRisk;</span>
+    }
+
+    private Integer getAge(LocalDate birthdate) {
+
+<span class="fc" id="L67">        Period period = Period.between(birthdate, LocalDate.now());</span>
+<span class="fc" id="L68">        return period.getYears();</span>
+    }
+
+    private int countNumberOfTrigger(List&lt;NoteBean&gt; noteBeanList) {
+
+<span class="fc" id="L73">        HashSet&lt;String&gt; strTriggerFound = new HashSet&lt;&gt;();</span>
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (NoteBean noteBean : noteBeanList)</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            for (int i = 0; i &lt; triggerWord.getTriggerList().size(); i++)</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">                if (noteBean.getPatientNote().toUpperCase().contains(triggerWord.getTriggerList().get(i).toUpperCase()))</span>
+<span class="fc" id="L78">                    strTriggerFound.add(triggerWord.getTriggerList().get(i).toUpperCase());</span>
+
+<span class="fc" id="L80">        return strTriggerFound.size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

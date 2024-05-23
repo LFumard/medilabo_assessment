@@ -1,0 +1,8 @@
+com\lfumard\medilabo_assessment\model\NoteBean.class
+com\lfumard\medilabo_assessment\model\PatientBean.class
+com\lfumard\medilabo_assessment\proxies\NoteProxy.class
+com\lfumard\medilabo_assessment\service\AssessmentService.class
+com\lfumard\medilabo_assessment\model\TriggerWord.class
+com\lfumard\medilabo_assessment\controller\AssessmentController.class
+com\lfumard\medilabo_assessment\proxies\PatientProxy.class
+com\lfumard\medilabo_assessment\MedilaboAssessmentApplication.class
