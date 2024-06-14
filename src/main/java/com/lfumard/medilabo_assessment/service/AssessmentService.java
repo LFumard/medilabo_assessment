@@ -70,6 +70,7 @@ public class AssessmentService {
 
     private int countNumberOfTrigger(List<NoteBean> noteBeanList) {
 
+        // Gestion de l'unicité des mots clés
         HashSet<String> strTriggerFound = new HashSet<>();
 
         for (NoteBean noteBean : noteBeanList)
